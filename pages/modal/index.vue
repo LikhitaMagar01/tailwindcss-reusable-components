@@ -11,33 +11,26 @@
     </div>
     <useModal @close-modal="toggleModal" :modalActive="modalActive">
         <div class="text-black">
-          <h1 class="text-2xl mb-1">About:</h1>
+          <h1 class="text-2xl mb-1">Lorem ipsum</h1>
           <p class="mb-4">
-            The Local Weather allows you to track the current and
-            future weather of cities of your choosing.
+            1914 translation by H. Rackham
           </p>
           <h2 class="text-2xl">How it works:</h2>
           <ol class="list-decimal list-inside mb-4">
             <li>
-              Search for your city by entering the name into the
-              search bar.
+              1914 translation by H. Rackham
             </li>
             <li>
-              Select a city within the results, this will take
-              you to the current weather for your selection.
+              1914 translation by H. Rackham
             </li>
             <li>
-              Track the city by clicking on the "+" icon in the
-              top right. This will save the city to view at a
-              later time on the home page.
+              1914 translation by H. Rackham
             </li>
           </ol>
 
-          <h2 class="text-2xl">Removing a city</h2>
+          <h2 class="text-2xl">H. Rackham</h2>
           <p>
-            If you no longer wish to track a city, simply select
-            the city within the home page. At the bottom of the
-            page, there will be am option to delete the city.
+            "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.
           </p>
         </div>
     </useModal>
