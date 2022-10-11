@@ -39,7 +39,6 @@
 
 <script setup>
 import useModal from "./useModal.vue";
-import { ref } from "vue";
 
 const modalActive = ref(null);
 const toggleModal = () => {
