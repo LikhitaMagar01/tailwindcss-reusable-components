@@ -2,18 +2,22 @@
   <div
     class="bg-gray-800 h-screen flex items-center justify-center antialiased hover:subpixel-antialiased"
   >
-    <div :class="color" v-if="!dismissible">
-      <div class="grid grid-cols-3 px-4">
-        <div class="grid justify-items-start">
-                <ExclamationCircleIcon class="h-5 w-6" />
-                <component :is="props.icon" class="h-5 w-6 bg-black" />
-              </div>
-        <h1 class="text-lg font-semi-bold grid justify-items-start">
-        {{ title }}
-      </h1>
-      <div class="grid justify-items-end">
-        <XMarkIcon class="w-5 h-5" @click="dismissible=true" />
-      </div>
+    <div :class="color"  v-if="!dismissible">
+      <div class="grid grid-cols-2 px-4">
+        <div class="flex flex-row py-2">
+          <component :is="props.icon" class="h-5 w-6"
+            ><ExclamationCircleIcon class="h-5 w-6"
+          /></component>
+          <h1 class="text-lg font-semi-bold">
+            {{ title }}
+          </h1>
+        </div>
+        <div class="grid justify-items-end">
+          <component :is="props.icon" class="h-5 w-6"
+            ><XMarkIcon class="h-5 w-6" @click="dismissible = true"
+          /></component>
+          <!-- <XMarkIcon class="w-5 h-5" @click="dismissible = true" /> -->
+        </div>
       </div>
       <p class="px-4">
         {{ body }}
@@ -23,28 +27,33 @@
 </template>
 
 <script setup>
-import { XMarkIcon,ExclamationCircleIcon, CheckBadgeIcon } from '@heroicons/vue/24/solid'
-let dismissible = ref(null)
-// let icon = ref('ExclamationCircleIcon')
+import {
+  XMarkIcon,
+  ExclamationCircleIcon
+} from "@heroicons/vue/24/solid";
+let dismissible = ref(null);
+let elementVisible = ref(true)
 const props = defineProps({
   title: {
-    type: String
-  }, 
+    type: String,
+  },
   body: {
-    type: String
+    type: String,
   },
   color: {
-    default: ""
+    default: "",
   },
   icon: {
-    default: ""
+    default: "",
   },
   dismissible: {
     type: Boolean,
-    default: ""
+    default: "",
   },
-  timeout: {
-    default: ""
-  }
-})
+  elementVisible: {
+    default: true,
+  },
+});
+// setTimeout(() => elementVisible.value = false, 5000)
+
 </script>
