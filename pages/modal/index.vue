@@ -9,7 +9,7 @@
         Toggle modal
       </button>
     </div>
-    <useModal @close-modal="toggleModal" :modalActive="modalActive">
+    <modal @close-modal="toggleModal" :modalActive="modalActive">
         <div class="text-black">
           <h1 class="text-2xl mb-1">About:</h1>
           <p class="mb-4">
@@ -40,12 +40,12 @@
             page, there will be am option to delete the city.
           </p>
         </div>
-    </useModal>
+      </modal>
   </div>
 </template>
 
 <script setup>
-import useModal from "./useModal.vue";
+import modal from '@/components/modal.vue';
 import { ref } from "vue";
 
 const modalActive = ref(null);
