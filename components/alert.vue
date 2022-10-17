@@ -1,60 +1,59 @@
 <template>
-    <div
-      class="bg-gray-800 h-screen flex items-center justify-center antialiased hover:subpixel-antialiased"
-    >
-      <div :class="color"  v-if="!dismissible">
-        <div class="grid grid-cols-2 px-4">
-          <div class="flex flex-row py-2">
-            <component :is="props.icon" class="h-5 w-6"
-              ><ExclamationCircleIcon class="h-5 w-6"
-            /></component>
-            <h1 class="text-lg font-semi-bold">
-              {{ title }}
-            </h1>
-          </div>
-          <div class="grid justify-items-end">
-            <component :is="props.icon" class="h-5 w-6"
-              ><XMarkIcon class="h-5 w-6" @click="dismissible = true"
-            /></component>
-            <!-- <XMarkIcon class="w-5 h-5" @click="dismissible = true" /> -->
-          </div>
-        </div>
-        <p class="px-4">
-          {{ body }}
-        </p>
-      </div>
-    </div>
-  </template>
-  
-  <script setup>
-  import {
-    XMarkIcon,
-    ExclamationCircleIcon
-  } from "@heroicons/vue/24/solid";
-  let dismissible = ref(null);
-  let elementVisible = ref(true)
-  const props = defineProps({
-    title: {
-      type: String,
-    },
-    body: {
-      type: String,
-    },
-    color: {
-      default: "",
-    },
-    icon: {
-      default: "",
-    },
-    dismissible: {
-      type: Boolean,
-      default: "",
-    },
-    elementVisible: {
-      default: true,
-    },
-  });
-  // setTimeout(() => elementVisible.value = false, 5000)
-  
-  </script>
-  
+  <div v-show="!dismissible" :class="getClass()">
+    <slot />
+  </div>
+</template>
+
+<script setup>
+let dismissible = ref(false);
+const props = defineProps({
+  type: {
+    default: "",
+  },
+  icon: {
+    default: "",
+  },
+  dismissible: {
+    type: Boolean,
+    default: "",
+  },
+  elementVisible: {
+    default: true,
+  },
+  fullWidth: {
+    default: false,
+  },
+  fullHeight: {
+    default: "",
+  },
+});
+function getClass() {
+  let types =
+    props.type === "primary"
+      ? "primary"
+      : props.type === "secondary"
+      ? "secondary"
+      : props.type === "success"
+      ? "success"
+      : "";
+  let height = props.fullheight ? `h-${props.fullheight}` : "";
+  let width = props.fullWidth ? `w-${props.fullWidth}` : "";
+  return `${types} ${height} ${width}`;
+};
+function getDismiss(){
+  let dismiss = props.dismissible === 'true' ? true : false;
+  return `${dismiss}`;
+}
+</script>
+text-gray-600 text-center p-3 rounded-lg
+<style>
+.primary {
+  @apply bg-sky-200 text-sky-600 text-center p-3 rounded-lg;
+}
+.secondary {
+  @apply text-gray-600 text-center p-3 rounded-lg;
+}
+.success {
+  @apply bg-green-200 text-green-600 text-center p-3 rounded-lg;
+}
+</style>
