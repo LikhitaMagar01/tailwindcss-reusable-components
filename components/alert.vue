@@ -1,11 +1,7 @@
 <script setup>
-import icon from '@/components/icon.vue';
-let dismissible = ref(false);
+import icon from "@/components/icon.vue";
 const props = defineProps({
   type: {
-    default: "",
-  },
-  icon: {
     default: "",
   },
   dismissible: {
@@ -22,8 +18,8 @@ const props = defineProps({
     default: "",
   },
   size: {
-    default: ""
-  }
+    default: "",
+  },
 });
 function getClass() {
   let types =
@@ -36,22 +32,19 @@ function getClass() {
       : "";
   let height = props.fullheight ? `h-${props.fullheight}` : "";
   let width = props.fullWidth ? `w-${props.fullWidth}` : "";
-  let icons = icon.props.path === false ? 'p-3 text-left' : 'text-center p-3';
-  console.log("props.icon", icon.props.path)
-  return `${icons} ${types} ${height} ${width}`;
-};
-// function getDismiss(){
-//   let dismiss = props.dismissible === 'true' ? true : false;
-//   return `${dismiss}`;
-// }
+  return `${types} ${height} ${width}`;
+}
+const show = () => {
+  props.dismissible = !props.dismissible
+}
 </script>
 
 <template>
-  <div v-show="!dismissible" :class="getClass()">
+  <div :class="getClass()">
     <slot />
-    <span>
+    <!-- <span>
       <icon v-if="icon" :path="icon" :size="iconSize" />
-    </span>
+    </span> -->
   </div>
 </template>
 
@@ -63,6 +56,6 @@ function getClass() {
   @apply text-gray-600 text-center p-3 rounded-lg;
 }
 .success {
-  @apply bg-green-200 text-green-600 rounded-lg;
+  @apply bg-green-200 text-green-600 text-center p-3 rounded-lg;
 }
 </style>
