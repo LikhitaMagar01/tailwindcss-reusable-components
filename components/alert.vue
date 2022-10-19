@@ -26,6 +26,12 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  color: {
+    type: String,
+  },
+  colorNum: {
+    default: ""
+  }
 });
 function getClass() {
   let types =
@@ -34,25 +40,38 @@ function getClass() {
       : props.type === "secondary"
       ? "secondary"
       : props.type === "success"
-      ? "success" : props.type === "danger"
-      ? "danger" : props.type === "warning"
-      ? "warning" : props.type === "info"
-      ? "info" : props.type === "light"
-      ? "light" : props.type === "dark"
-      ? "dark" : props.type === "link"
-      ? "link" 
-      : "";
+      ? "success"
+      : props.type === "danger"
+      ? "danger"
+      : props.type === "warning"
+      ? "warning"
+      : props.type === "info"
+      ? "info"
+      : props.type === "light"
+      ? "light"
+      : props.type === "dark"
+      ? "dark"
+      : props.type === "link"
+      ? "link"
+      : `bg-${color}-${colorNum} text-${color}-${colorNum-400}`;
   let height = props.fullheight ? `h-${props.fullheight}` : "";
   let width = props.fullWidth ? `w-${props.fullWidth}` : "";
-  let textStyle = props.dismissible || props.icon === true ? 'grid grid-cols-6' : '';
-  let setTimer = props.setTime === true ? setTimeout(() => show.value = false, 5000) : ''
+  let textStyle =
+    props.dismissible || props.icon === true ? "grid grid-cols-6" : "";
+  let setTimer =
+    props.setTime === true ? setTimeout(() => (show.value = false), 5000) : "";
   return `${setTimer} ${textStyle} ${types} ${height} ${width}`;
 }
 </script>
 
 <template>
   <div v-show="show" :class="getClass()">
-    <div :class="{'col-start-1 col-end-5' : props.icon||props.dismissible==true, 'text-center':props.icon||props.dismissible==false}">
+    <div
+      :class="{
+        'col-start-1 col-end-5': props.icon || props.dismissible == true,
+        'text-center': props.icon || props.dismissible == false,
+      }"
+    >
       <span v-if="props.icon == true ? show : !show">
         <icon
           v-if="icon"
@@ -79,30 +98,30 @@ function getClass() {
 
 <style>
 .primary {
-  @apply bg-sky-200 text-sky-600 text-center p-3 rounded-lg drop-shadow-sm
+  @apply bg-sky-200 text-sky-600 text-center p-3 rounded-lg drop-shadow-sm;
 }
 .secondary {
-  @apply text-gray-600 text-center p-3 rounded-lg drop-shadow-sm
+  @apply text-gray-600 text-center p-3 rounded-lg drop-shadow-sm;
 }
 .success {
-  @apply bg-green-200 text-green-600 text-center p-3 rounded-lg drop-shadow-sm
+  @apply bg-green-200 text-green-600 text-center p-3 rounded-lg drop-shadow-sm;
 }
-.danger{
-  @apply bg-red-200 text-red-600 text-center p-3 rounded-lg drop-shadow-sm
+.danger {
+  @apply bg-red-200 text-red-600 text-center p-3 rounded-lg drop-shadow-sm;
 }
-.warning{
-  @apply bg-yellow-200 text-yellow-600 text-center p-3 rounded-lg drop-shadow-sm
+.warning {
+  @apply bg-yellow-200 text-yellow-600 text-center p-3 rounded-lg drop-shadow-sm;
 }
-.info{
-  @apply bg-blue-200 text-blue-600 text-center p-3 rounded-lg drop-shadow-sm
+.info {
+  @apply bg-blue-200 text-blue-600 text-center p-3 rounded-lg drop-shadow-sm;
 }
-.light{
-  @apply bg-white drop-shadow-sm
+.light {
+  @apply bg-white drop-shadow-sm;
 }
-.dark{
-  @apply bg-black text-white drop-shadow-sm
+.dark {
+  @apply bg-black text-white drop-shadow-sm;
 }
-.link{
-  @apply bg-white text-blue-600 underline underline-offset-1 drop-shadow-sm
+.link {
+  @apply bg-white text-blue-600 underline underline-offset-1 drop-shadow-sm;
 }
 </style>
