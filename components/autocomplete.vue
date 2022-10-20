@@ -1,4 +1,5 @@
 <script setup>
+import icon from "@/components/icon.vue";
 let emit = defineEmits(['input']);
 defineProps({
     options: {
@@ -17,21 +18,22 @@ defineProps({
     },
 })
 let open = ref(false)
+let isOpen = ref(false)
 let selected = ref('select an option')
-//   function selectedfun(){
-//     let selectedoption = props.default ? props.default : props.option.length > 0 ? props.option[0] : null;
-//     return `${selectedoption}`;
-//   };
-
 </script>
 
 <template>
     <div class="m-10">
-  <div class="relative w-2/4 h-10 bg-black drop-shadow-md text-white text-left outline rounded sm outline-sm" :tabindex="tabindex">
-    <div class="bg-black rounded-sm p-1" @click="open = !open">
+  <div class="grid grid-cols-1 p-1 w-1/4 h-10 bg-black drop-shadow-md text-white text-left relative rounded-md outline-sm" :tabindex="tabindex">
+    <div class="flex place-items-center justify-between" @click="open = !open">
       {{ selected }}
+    <icon path="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" iconSize="10" :class="{
+          'rotate-180': open,
+          'rotate-0': !open,
+        }">
+        </icon> 
     </div>
-    <div class="bg-black" v-show="open">
+    <div class="bg-black p-1 absolute w-full top-11 rounded-md" v-show="open">
       <div
         v-for="(option, i) of options"
         :key="i"
