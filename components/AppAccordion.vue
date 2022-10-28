@@ -50,7 +50,7 @@ defineProps ({
 <template>
   <div>
     <button
-      @click="toggleAccordion()"
+      @click="open = !open"
       class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
       :aria-expanded="isOpen"
       :aria-controls="`collapse${_uid}`"
@@ -77,24 +77,13 @@ defineProps ({
         />
       </svg>
     </button>
-
-    <div v-show="isOpen" :id="`collapse${_uid}`" class="p-5 font-light border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-      <slot name="content" class="text-gray-500 dark:text-gray-400" />
+    <div v-show="open" :id="`collapse${_uid}`" class="p-5 font-light border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+    <slot name="content" class="text-gray-500 dark:text-gray-400" />
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      isOpen: false,
-    };
-  },
-  methods: {
-    toggleAccordion() {
-      this.isOpen = !this.isOpen;
-    },
-  },
-};
+<script setup>
+let isOpen = ref(false)
+let open = ref(false)
 </script>

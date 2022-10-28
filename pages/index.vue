@@ -6,10 +6,22 @@
             <NuxtLink to="/Accordion">Accordion</NuxtLink>
             </div>
             <div>
-            <NuxtLink to="/BaseInput">Base Input</NuxtLink>
+            <NuxtLink to="/Input">Base Input</NuxtLink>
             </div>
             <div>
             <NuxtLink to="/Avatar">Base Avatar</NuxtLink>
+            </div>
+            <div>
+            <NuxtLink to="/Card">Base Card</NuxtLink>
+            </div>
+            <div>
+            <NuxtLink to="/DropDown">Base Dropdown</NuxtLink>
+            </div>
+            <div>
+            <NuxtLink to="/Checkbox">Base Checkbox</NuxtLink>
+            </div>
+            <div>
+            <NuxtLink to="/ListGroup">Base ListGroup</NuxtLink>
             </div>
    
         </div>
