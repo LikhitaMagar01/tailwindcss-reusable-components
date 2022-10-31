@@ -1,10 +1,11 @@
 <script setup>
+import singleSelect from '@/components/singleSelect.vue';
 let assignment = ref(['you belong with me', 'dress', 'permanent marker', 'lucky you', 'wildest dream'])
 </script>
 
 <template>
-    <autocomplete
+    <singleSelect
       :options="assignment"
-      placeholder="Type here ..."
+      :default="'dress'"
     />
 </template>

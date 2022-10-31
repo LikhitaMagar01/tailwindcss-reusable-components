@@ -1,51 +1,79 @@
 <script setup>
-import icon from "@/components/icon.vue";
-let emit = defineEmits(['input']);
-defineProps({
-    options: {
-      type: Array,
-      required: true,
-    },
-    default: {
-      type: String,
-      required: false,
-      default: null,
-    },
-    tabindex: {
-      type: Number,
-      required: false,
-      default: 0,
-    },
-})
-let open = ref(false)
-let isOpen = ref(false)
-let selected = ref('select an option')
+let emit = defineEmits(["input"]);
+// var searchTerm = ref("");
+// let selectedCountry = ref("");
+var state = ref("");
+var filteredStates = ref([]);
+
+const props = defineProps({
+  options: {
+    type: Array,
+    required: true,
+  },
+  placeholder: {
+    type: String,
+    required: false,
+    default: "type here...",
+  },
+  tabindex: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+});
+
+// const searchCountries = computed(() => {
+//   if (searchTerm.value === "") {
+//     return [];
+//   }
+//   return props.options.filter((option) => {
+//     if (option.toLowerCase().includes(searchTerm.value.toLowerCase())) {
+//       return option;
+//     }
+//   });
+// });
+
+// const selectCountry = (country) => {
+//   selectedCountry.value = country;
+//   searchTerm.value = "";
+// };
+
+function filterStates(){
+    filteredStates.value = props.options.filter(place => {
+        return place.toLowerCase().startsWith(state.value.toLowerCase());
+    })
+}
+
 </script>
 
 <template>
-    <div class="m-10">
-  <div class="grid grid-cols-1 p-1 w-1/4 h-10 bg-black drop-shadow-md text-white text-left relative rounded-md outline-sm" :tabindex="tabindex">
-    <div class="flex place-items-center justify-between" @click="open = !open">
-      {{ selected }}
-    <icon path="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" iconSize="10" :class="{
-          'rotate-180': open,
-          'rotate-0': !open,
-        }">
-        </icon> 
-    </div>
-    <div class="bg-black p-1 absolute w-full top-11 rounded-md" v-show="open">
+  <div class="m-10">
+    <div
+      class="grid grid-cols-1 p-1 w-1/4 h-10 bg-black drop-shadow-md text-white text-left relative rounded-md outline-sm"
+      :tabindex="tabindex"
+    >
+      <input
+        type="text"
+        :placeholder="placeholder"
+        class="flex place-items-center justify-between bg-black"
+        v-model="state"
+        @input="filterStates()"
+      />
       <div
-        v-for="(option, i) of options"
-        :key="i"
-        @click="
-          selected = option;
-          open = false;
-          emit('input', option)
-        "
+        v-if="filteredStates"
+        class="bg-black p-1 absolute w-full top-11 rounded-md"
       >
-        {{ option }}
+      <ul>
+        <li v-for="filteredState in filteredStates">{{ filteredState }}</li>
+      </ul>
+        <div
+          v-for="option in options"
+          :key="option.id"
+          @click="emit('input', option)"
+        >
+
+        </div>
       </div>
     </div>
   </div>
-    </div>
 </template>
