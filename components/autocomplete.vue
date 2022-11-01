@@ -1,85 +1,135 @@
+<template>
+  <div class="dropdown" v-if="this.isVisible">
+    <div class="dropdown-menu show w-100 border">
+      <span
+        class="dropdown-item"
+        v-for="item in items"
+        :key="item.id"
+        v-on:click="selectValue(item)"
+      >
+        {{ item.first_name }}
+        <!-- <small v-if="item.full_name">{{ item.full_name }}</small> -->
+        <span
+          class="float-end fa fa-check text-primary"
+          v-if="
+            selected_object.find((o) => o.key === item.id) !== undefined
+          "
+        ></span>
+      </span>
+    </div>
+  </div>
+  <div class="input-group form-control mb-3 p-0">
+    <div class="input-group-prepend pt-2 px-1">
+      <span
+        class="badge bg-primary me-1 text-capitalize"
+        v-for="(obj, index) in selected_object"
+        :key="obj.id"
+      >
+        {{ obj.value }}
+        <span class="ps-1 cursor-pointer" @click="removeValue(index)"
+          >&#10006;</span
+        >
+      </span>
+    </div>
+    <input
+      type="text"
+      class="form-control border-0 shadow-none pl-2"
+      :disabled="disabled"
+      v-model="search"
+      @keyup="getList"
+      @keydown.delete="removeLastValue"
+    />
+  </div>
+</template>
 <script setup>
-let emit = defineEmits(["input"]);
-// var searchTerm = ref("");
-// let selectedCountry = ref("");
-var state = ref("");
-var filteredStates = ref([]);
-var modal = ref(false)
+var search = ref("");
+var isVisible = ref("");
+var selected_object = ref("");
+var items = ref([]);
+var disabled = ref(false);
 
 const props = defineProps({
   options: {
     type: Array,
-    required: true,
+    default: "",
+  },
+  multiple: {
+    type: Boolean,
+    default: false,
+  },
+  keyword: {
+    type: String,
+    default: "",
   },
   placeholder: {
     type: String,
-    required: false,
-    default: "type here...",
-  },
-  tabindex: {
-    type: Number,
-    required: false,
-    default: 0,
+    default: "type anything...",
   },
 });
 
-// const searchCountries = computed(() => {
-//   if (searchTerm.value === "") {
-//     return [];
-//   }
-//   return props.options.filter((option) => {
-//     if (option.toLowerCase().includes(searchTerm.value.toLowerCase())) {
-//       return option;
-//     }
-//   });
-// });
+function selectValue(obj) {
+  let exist = selected_object.value.find((o) => o.key === obj.id);
+  // if(obj.name){
+  if (exist == undefined) {
+    let object = {
+      key: obj.id,
+      value: obj.value,
+    };
+    selected_object.value.push(object);
+    search.value = "";
+    isVisible.value = !isVisible.value;
+    checkMultiple();
+  }
+}
 
-// const selectCountry = (country) => {
-//   selectedCountry.value = country;
-//   searchTerm.value = "";
-// };
+function removeValue(index) {
+  selected_object.value.splice(index, 1);
+  checkMultiple();
+}
 
-function filterStates(){
-    filteredStates.value = props.options.filter(place => {
-        return place.toLowerCase().startsWith(state.value.toLowerCase());
-    })
-};
-function setState(place){
-  state.value = place
-  modal.value = false
-};
-// watch(filteredStates,()=>{
-//   console.log(filteredStates.value), {immediate: true};
-// })
+function removeLastValue() {
+  if (search.value == "") {
+    selected_object.value.pop();
+    checkMultiple();
+  }
+}
+
+const checkMultiple = computed(() => {
+  if (!props.multiple) {
+    if (selected_object.value.length >= 1) {
+      disabled.value = true;
+    } else {
+      disabled.value = false;
+    }
+  }
+});
+function getList() {
+  for (var end in props.options) {
+    if (props.options.length < 1) {
+      isVisible.value = false;
+    } else {
+      isVisible.value = true;
+    }
+  }
+  // this.API.get(`${this.endpoint}?search=${this.search}&limit=10`).then(
+  //   (response) => {
+  //     this.items = response.data.results;
+  //     console.log(response.data.results);
+  //     if (this.items.length < 1) {
+  //       this.isVisible = false;
+  //     } else {
+  //       this.isVisible = true;
+  //     }
+  //   }
+  // );
+}
 </script>
-
-<template>
-  <div class="m-10">
-    <div
-      class="grid grid-cols-1 p-1 w-1/4 h-10 bg-black drop-shadow-md text-white text-left relative rounded-md outline-sm"
-      :tabindex="tabindex"
-    >
-      <input
-        type="text"
-        :placeholder="placeholder"
-        class="flex place-items-center justify-between bg-black"
-        v-model="state"
-        @input="filterStates()" @focus="modal = true"
-      />
-      <div
-        v-if="filteredStates && modal"
-        class="bg-black p-1 absolute w-full top-11 rounded-md"
-      >
-      <ul>
-        <li v-for="filteredState in filteredStates" @click="setState(filteredState)">{{ filteredState }}</li>
-      </ul>
-        <div
-          v-for="option in options"
-          :key="option.id"
-          @click="emit('input', option)"
-        >
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
+<style scoped>
+.input-group .form-control:focus {
+  border-left: 0 !important;
+  border-right: 0 !important;
+}
+.form-control:disabled {
+  background-color: #fff;
+}
+</style>
