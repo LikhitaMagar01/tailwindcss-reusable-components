@@ -4,6 +4,7 @@ let emit = defineEmits(["input"]);
 // let selectedCountry = ref("");
 var state = ref("");
 var filteredStates = ref([]);
+var modal = ref(false)
 
 const props = defineProps({
   options: {
@@ -42,8 +43,14 @@ function filterStates(){
     filteredStates.value = props.options.filter(place => {
         return place.toLowerCase().startsWith(state.value.toLowerCase());
     })
-}
-
+};
+function setState(place){
+  state.value = place
+  modal.value = false
+};
+// watch(filteredStates,()=>{
+//   console.log(filteredStates.value), {immediate: true};
+// })
 </script>
 
 <template>
@@ -57,21 +64,20 @@ function filterStates(){
         :placeholder="placeholder"
         class="flex place-items-center justify-between bg-black"
         v-model="state"
-        @input="filterStates()"
+        @input="filterStates()" @focus="modal = true"
       />
       <div
-        v-if="filteredStates"
+        v-if="filteredStates && modal"
         class="bg-black p-1 absolute w-full top-11 rounded-md"
       >
       <ul>
-        <li v-for="filteredState in filteredStates">{{ filteredState }}</li>
+        <li v-for="filteredState in filteredStates" @click="setState(filteredState)">{{ filteredState }}</li>
       </ul>
         <div
           v-for="option in options"
           :key="option.id"
           @click="emit('input', option)"
         >
-
         </div>
       </div>
     </div>
