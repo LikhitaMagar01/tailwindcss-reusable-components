@@ -11,6 +11,9 @@
       <NuxtLink to="/badge">Badge</NuxtLink>
     </div>
     <div class="text-blue-300 underline underline-offset-1">
+      <NuxtLink to="/datepicker">Datepicker</NuxtLink>
+    </div>
+    <div class="text-blue-300 underline underline-offset-1">
       <NuxtLink to="/icon">Icon</NuxtLink>
     </div>
     <div class="text-blue-300 underline underline-offset-1">
