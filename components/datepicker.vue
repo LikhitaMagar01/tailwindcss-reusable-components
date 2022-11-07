@@ -2,6 +2,7 @@
 const props = defineProps({
   value: {
     type: String,
+    required: false,
     default: "",
   },
   placeholder: {
@@ -25,9 +26,10 @@ const props = defineProps({
 
 <template>
   <div>
-    <input
+    <field
+      as="input"
       :value="value"
-      class="border-2 border-black"
+      class="border-2 border-black w-20 h-10"
       :type="type"
       :id="id"
       :name="name"

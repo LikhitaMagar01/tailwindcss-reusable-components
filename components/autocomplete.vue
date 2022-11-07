@@ -2,11 +2,12 @@
 let emit = defineEmits(["input"]);
 
 var state = ref("");
+var places = ref("")
+var thisPlaces = ref("")
 var filteredStates = ref([]);
-var modal = ref(false);
-var optionVisible = ref(false);
-var filterVisible = ref(false);
-var disabled = ref(false);
+var filterState = ref(false)
+var states = ref([]);
+var noFilteredState = ref(false);
 
 const props = defineProps({
   options: {
@@ -25,63 +26,36 @@ const props = defineProps({
     default: 0,
   },
   multiple: {
-    type: Boolean,
-    required: false,
-    default: false,
+    type: Boolean
   },
 });
 
-function filterStates(){
-  if(state.value.length > 0){
-    filteredStates.value = props.options.filter(place => {
-        return place.toLowerCase().startsWith(state.value.toLowerCase());
-    })
-    if(filteredStates.value){
-      filterVisible.value = true
-      optionVisible.value = false
+function filterStates() {
+  noFilteredState.value = false
+  filterState.value = true
+    filteredStates.value = props.options.filter((place) => {
+    return place.toLowerCase().startsWith(state.value.toLowerCase());
+  })
+}
+
+function setState(place) {
+  if(props.multiple){
+    places.value = place;
+    thisPlaces.value = places.value.substring(0,5)
+    states.value.push(thisPlaces.value)
+    filterState.value = false
+    }else{
+      state.value = place;
     }
-  }else{
-    optionVisible.value = true
-  }
-};
-// function setState(place){
-// state.value = place
-//   // modal.value = false
-// }
-
-function selectValue(obj) {
-  state.value = place
-  let exist = filteredStates.value.find((o) => o.key === obj.id);
-  if (exist == undefined) {
-    let object = {
-      key: obj.id,
-      value: obj,
-    };
-    filteredStates.value.push(object);
-  }
 }
 
-function getList() {
-  if (props.options.length < 1) {
-    optionVisible.value = false;
-  } else {
-    optionVisible.value = true;
-  }
-  console.log(props.options.length);
+function getList(){
+  noFilteredState.value = true
 }
 
-function checkMultiple() {
-  if (!props.multiple) {
-    if (filteredStates.value.length >= 1) {
-      disabled.value = true;
-    } else {
-      disabled.value = false;
-    }
-  }
+function removeState(index){
+  states.value.splice(index, 1)
 }
-checkMultiple();
-
-
 </script>
 
 <!-- <style>
@@ -97,42 +71,46 @@ checkMultiple();
 }
 </style> -->
 
+
 <template>
-  <div class="relative select block">
-    <!-- <div>
-      <span v-for="(obj, index) in filteredStates" :key="obj.id">
-        {{ obj.value }}
-        <span>&#10006;</span>
+  <div class="m-10">
+    <div
+      class="grid grid-row-2 p-1 w-80 bg-black drop-shadow-md text-white text-left relative rounded-md outline-sm  overflow-hidden"
+      :tabindex="tabindex"
+    >
+    <div class="flex flex-col flex-col-reverse w-80">
+    <div class="flex w-full flex flex-row-reverse bg-black text-white overflow-x-auto">
+      <span v-for="(st, index) in states" :key="st.id" class="text-white bg-black flex first:mr-auto min-w-max">
+            {{ st }}
+            <icon size="20" path="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" @click="removeState(index)"></icon>
       </span>
-    </div> -->
-    <input
-      class=" flex place-items-center justify-between bg-black text-white rounded-md p-1 w-1/4 h-10"
-      type="text"
-      :disabled="disabled"
-      v-model="state"
-      @click="getList"
-      @input="filterStates()" @focus ="modal = false"
-    />
-    <div v-if="optionVisible" 
-      :class="{'hidden' : modal == true ,
-      'p-2 w-1/4 bg-black drop-shadow-md text-white rounded-md outline-sm option': modal == false}">
-      <div
-        v-for="option in options"
-        :key="option.id"
-        @click="selectValue(item)"
-        >{{ option }}</div
-      >
-    </div>
-      <div
-        class="bg-red-200 p-1 absolute w-full top-11 rounded-md"
-        v-if="filterVisible && state"
-      >
-      <div
-        v-for="filterState in filteredStates"
-        :key="filterState.id"
-        @click="selectValue(option)"
-        >{{ filterState }}</div
-      >
       </div>
+      <input
+        type="text"
+        :placeholder="placeholder"
+        class="flex w-full place-items-center justify-between bg-black text-white"
+        v-model="state"
+        @click="getList()"
+        @input="filterStates()"
+      />
+    </div>
+      <div>
+        <ul v-if="noFilteredState" class="bg-black p-1  w-full top-11 rounded-md">
+          <li v-for="option in options" @click="setState(option)">
+            {{ option }}
+          </li>
+        </ul>
+        <ul v-if="filterState" class="bg-black p-1  w-full top-11 rounded-md">
+          <li v-for="filteredState in filteredStates" @click="setState(filteredState)">
+            {{ filteredState }}
+          </li>
+        </ul>
+        <!-- <div
+          v-for="option in options"
+          :key="option.id"
+          @click="emit('input', option)"
+        ></div> -->
+      </div>
+    </div>
   </div>
 </template>

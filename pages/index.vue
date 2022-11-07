@@ -5,6 +5,9 @@
       <NuxtLink to="/alert">Alert</NuxtLink>
     </div>
     <div class="text-blue-300 underline underline-offset-1">
+      <NuxtLink to="/avatar">Avatar</NuxtLink>
+    </div>
+    <div class="text-blue-300 underline underline-offset-1">
       <NuxtLink to="/autocomplete">AutoComplete</NuxtLink>
     </div>
     <div class="text-blue-300 underline underline-offset-1">
@@ -27,6 +30,9 @@
     </div>
     <div class="text-blue-300 underline underline-offset-1">
       <NuxtLink to="/spinner">Spinner</NuxtLink>
+    </div>
+    <div class="text-blue-300 underline underline-offset-1">
+      <NuxtLink to="/toast">Toast</NuxtLink>
     </div>
   </div>
 </template>
