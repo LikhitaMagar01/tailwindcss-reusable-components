@@ -34,5 +34,11 @@
     <div class="text-blue-300 underline underline-offset-1">
       <NuxtLink to="/toast">Toast</NuxtLink>
     </div>
+    <div class="text-blue-300 underline underline-offset-1">
+      <NuxtLink to="/ProgressBar">Progress Bar</NuxtLink>
+    </div>
+    <div class="text-blue-300 underline underline-offset-1">
+      <NuxtLink to="/circularbar">Circular Bar</NuxtLink>
+    </div>
   </div>
 </template>

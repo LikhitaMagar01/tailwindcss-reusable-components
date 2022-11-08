@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from "vue";
-var open = ref(true)
+var open = ref(false)
 const props = defineProps({
   username: {
     type: String,
@@ -20,6 +20,10 @@ const props = defineProps({
   },
   shape: {
     type: [String, Number],
+    default: ""
+  },
+  name: {
+    type: String,
     default: ""
   }
 });
@@ -49,14 +53,14 @@ const username = computed(() => props.username);
       <img
       :src="avatar"
       :alt="username"
-      class="block bg-gray-100 dark:bg-slate-800 relative"
+      class="bg-gray-50 relative"
       :class="getSize()"
     />
     </div>
     
-    <span title="name" class="name bg-gray-400 rounded p-1 -z-10 m-2 absolute top-0 opacity-100">{{username}}</span>
-    <div v-show="open">
-      <ul class="py-1 text-base text-gray-700 dark:text-gray-200">
+    <span title="name" class="name bg-gray-400 rounded p-1 -z-10 m-2 absolute top-0 opacity-100">{{name}}</span>
+    <div v-show="open" class="z-10 w-44 bg-white rounded shadow dark:bg-gray-700">
+      <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
       <li class="block">
         Dashboard
       </li>
@@ -79,7 +83,7 @@ const username = computed(() => props.username);
 .card:hover .name{
     visibility: visible !important;
 }
-.block {
+.block{
   @apply py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white
 }
 </style>
