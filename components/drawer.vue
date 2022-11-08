@@ -11,11 +11,9 @@ const props = defineProps({
         required: false,
     }
 })
-
 const openTab = ()=>{
     showPopup.value = !showPopup.value
 }
-
 function getClass(){
     let getSide = props.side === "left" ? "absolute bg-white drop-shadow-md w-80 h-full " : props.side === "right" ? "absolute bg-white drop-shadow-md w-80 h-full right-0" : props.side === "up" ? "w-full h-5/6 top-0 right-0 absolute bg-white drop-shadow-md" :  props.side === "down" ? "w-full h-1/2 bottom-0 right-0 absolute bg-white drop-shadow-md " : ""
     return `${getSide}`
@@ -52,7 +50,6 @@ function getClass(){
 .modal-active{
     left:0;
 } */
-
 .modal-inner-enter-from {
     bottom: -16rem;
 }
@@ -66,4 +63,3 @@ function getClass(){
     bottom: -16rem;
 }
 </style> 
-<!-- i18n -->

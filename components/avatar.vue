@@ -46,7 +46,6 @@ const avatar = computed(
 );
 const username = computed(() => props.username);
 </script>
-
 <template>
   <div class="card">
     <div @click="openTab()">
@@ -75,7 +74,6 @@ const username = computed(() => props.username);
     <slot />
   </div>
 </template>
-
 <style>
 .name{
     visibility: hidden;

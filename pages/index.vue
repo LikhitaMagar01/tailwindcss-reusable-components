@@ -3,17 +3,12 @@
     <h1>Homepage</h1>
     <div class="text-blue-300 underline underline-offset-1">
       <NuxtLink to="/alert">Alert</NuxtLink>
-    <div class="p-5">
-        <h1>Home Page</h1>
         <div class="text-blue-300 underline underline-offset-1">
             <div>
             <NuxtLink to="/Accordion">Accordion</NuxtLink>
             </div>
             <div>
             <NuxtLink to="/Input">Base Input</NuxtLink>
-            </div>
-            <div>
-            <NuxtLink to="/Avatar">Base Avatar</NuxtLink>
             </div>
             <div>
             <NuxtLink to="/Card">Base Card</NuxtLink>
@@ -29,7 +24,6 @@
             </div>
    
         </div>
-    </div>
     <div class="text-blue-300 underline underline-offset-1">
       <NuxtLink to="/avatar">Avatar</NuxtLink>
     </div>
