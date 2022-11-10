@@ -47,6 +47,7 @@ function getClass() {
   let width = props.fullWidth ? `w-${props.fullWidth}` : "";
   return `${types} ${height} ${width}`;
 }
+//position change
 </script>
 
 <template>
