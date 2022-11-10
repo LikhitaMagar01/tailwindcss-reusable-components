@@ -6,7 +6,8 @@ import alert from "@/components/alert.vue";
   <div>
     <div class="mt-10">
       <alert
-      color="orange-500"
+      color="purple"
+      colorNum="500"
       fullHeight="14"
       fullWidth="2/5"
       dismissible
