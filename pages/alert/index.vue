@@ -1,27 +1,32 @@
 <script setup>
 import alert from "@/components/alert.vue";
-defineProps({
-  modalActive: {
-    type: Boolean,
-    default: false,
-  },
-});
-let show = ref(true);
-// setTimeout(() => elementVisible.value = false, 5000)
 </script>
 
 <template>
   <div>
-    <div class="text-center mt-10 rounded-lg bg-blue-200 text-blue-600 h-12 w-2/5">
+    <div class="mt-10">
+      <alert
+      color="orange-500"
+      fullHeight="14"
+      fullWidth="2/5"
+      dismissible
+      icon
+      border="left"
+    >
+      A simple primary alert—check it out!
+    </alert>
+    </div>
+    <div class="border-l-8 border-blue-200 text-center mt-10 bg-blue-300 text-blue-800 h-12 w-2/5">
       <div class="p-3">A simple primary alert—check it out!</div>
     </div>
     <div class="mt-10">
       <alert
-      type="danger"
+      type="success"
       fullHeight="14"
       fullWidth="2/5"
-      :dismissible="false"
-      :icon="true"
+      dismissible
+      icon
+      border="left"
     >
       A simple primary alert—check it out!
     </alert>
@@ -31,8 +36,8 @@ let show = ref(true);
       type="success"
       fullHeight="14"
       fullWidth="2/5"
-      :dismissible="true"
-      :icon="true"
+      dismissible
+      icon
     >
       A simple primary alert—check it out!
     </alert>
@@ -42,12 +47,13 @@ let show = ref(true);
       type="link"
       fullHeight="14"
       fullWidth="2/5"
-      :dismissible="false"
-      :icon="false"
-      :setTime = "true"
+      dismissible
+      icon
+      setTime
     >
       A simple primary alert—check it out!
     </alert>
     </div>
   </div>
 </template>
+<!-- bg-orange-300 -->
