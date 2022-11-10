@@ -59,15 +59,15 @@ const getClass = ()=>{
       ? "dark"
       : props.type === "link"
       ? "link"
-      : "";
-    var getType = props.color === 'orange-500' ? 'orange-500' : '';
+      : `bg-purple-300 text-purple-600`;
+    // var getType = props.color === 'orange-500' ? 'orange-500' : '';
   let height = props.fullheight ? `h-${props.fullheight}` : "h-14";
   let width = props.fullWidth === "1/5" ? `w-1/5` : props.fullWidth === "2/5" ? `w-2/5` : props.fullWidth === "3/5" ? `w-3/5` : props.fullWidth === "4/5" ? `w-4/5` : props.fullWidth === "5/5" ? `w-5/5` : props.fullWidth === "5/5" ? `w-5/5` : props.fullWidth ? `w-${props.fullWidth}` : "w-full";
   let textStyle =
     props.dismissible || props.icon ? "grid grid-cols-6" : "";
   let setTimer =
     props.setTime === true ? setTimeout(() => (show.value = false), 5000) : "";
-  return `${getborder} ${setTimer} ${textStyle} ${types} ${getType} ${height} ${width}`;
+  return `${getborder} ${setTimer} ${textStyle} ${types} ${height} ${width}`;
 }
 </script>
 
@@ -102,3 +102,9 @@ const getClass = ()=>{
     </span>
   </div>
 </template>
+
+<style>
+.success{
+  @apply bg-red-300
+}
+</style>
