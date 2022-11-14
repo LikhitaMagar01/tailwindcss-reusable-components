@@ -43,6 +43,9 @@
       <NuxtLink to="/datepicker">Datepicker</NuxtLink>
     </div>
     <div class="text-blue-300 underline underline-offset-1">
+      <NuxtLink to="/drawer">Drawer</NuxtLink>
+    </div>
+    <div class="text-blue-300 underline underline-offset-1">
       <NuxtLink to="/fileInput">FileInput</NuxtLink>
     </div>
     <div class="text-blue-300 underline underline-offset-1">

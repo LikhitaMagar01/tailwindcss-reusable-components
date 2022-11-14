@@ -2,19 +2,31 @@
 <script setup>
 var filelist = ref([]);
 var active = ref(false);
-var dropzoneFile = ref(null);
-
+var dropfile = ref("")
 const activeToggle = ()=>{
     active.value = !active.value
 }
 
 const drop = (e) => {
     active.value = !active.value
-    // dropzoneFile.value = e.dataTransfer.files;
-    dropzoneFile.value = e.dataTransfer.items;
-    console.log(dropzoneFile.value)
+    // e.preventDefault();
+    // filelist.value = [...e.dataTransfer.files];
+    dropfile.value = e.dataTransfer.files;
 
+    // const formData = new FormData();
+    //   formData.append("file", filelist.value);
+    console.log(dropfile.value)
 };
+
+const onChange = (e)=>{
+    const image = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(image);
+    reader.onload = e => {
+        filelist.value = e.target.result;
+        console.log(filelist.value)
+    }
+}
 
 
 </script>
@@ -22,14 +34,13 @@ const drop = (e) => {
 <template>
   <div class="mx-20 mt-5">
     <div
-      class="grid place-content-center border-2 border-gray-200 border-dashed rounded-lg h-64 w-2/2" :class="[active ? 'hover:bg-gray-100 opacity-0.8' : '']"
-    >
-      <label
-        @dragenter.prevent="activeToggle"
+      class="grid place-content-center border-2 border-gray-200 border-dashed rounded-lg h-64 w-2/2" :class="[active ? 'hover:bg-gray-100 opacity-0.8' : '']" @dragenter.prevent="activeToggle"
         @dragleave.prevent="activeToggle" @dragover.prevent
-        @drop.prevent="drop"
+        @drop="drop"
+    >
+      <label  
       >
-        <div>
+        <div class="grid place-content-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -47,17 +58,18 @@ const drop = (e) => {
           <span class="font-semibold text-gray-400">Click to upload</span>
           or drag and drop
         </div>
-        <div class="text-gray-400 text-sm">SVG, PNG, GIF (MAX. 800x400px)</div>
+        <div class="text-gray-400 text-sm grid place-content-center">SVG, PNG, GIF (MAX. 800x400px)</div>
         <input
         type="file"
         multiple
         class="w-px h-px opacity-0 overflow-hidden absolute"
-        ref="dropzoneFile"
+        @change="onChange"
+        ref="filelist"
         accept=".pdf,.jpg,.jpeg,.png"
       />
       </label>
-      <ul class="mt-4" v-if="filelist.length" v-cloak>
-        <li class="text-sm p-1" v-for="file in filelist">
+      <ul class="mt-4" v-if="filelist.length >= 1">
+        <li class="text-sm p-1" v-for="file in filelist" :key="file.id">
           {{ file.name }}
         </li>
         <button
@@ -68,8 +80,7 @@ const drop = (e) => {
           remove
         </button>
       </ul>
-      <span> File: {{dropzoneFile}}</span>
     </div>
-    <!-- <input class="block w-full cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:border-transparent text-sm rounded-lg" aria-describedby="user_avatar_help" id="user_avatar" type="file"> -->
   </div>
+
 </template>
