@@ -8,14 +8,15 @@ const activeToggle = ()=>{
 }
 
 const drop = (e) => {
-    active.value = !active.value
+    // active.value = !active.value
     // e.preventDefault();
     // filelist.value = [...e.dataTransfer.files];
-    dropfile.value = e.dataTransfer.files;
-
+    // dropfile.value = e.dataTransfer.files;
+    // console.log(e)
     // const formData = new FormData();
     //   formData.append("file", filelist.value);
-    console.log(dropfile.value)
+    // console.log(dropfile.value)
+    
 };
 
 const onChange = (e)=>{
