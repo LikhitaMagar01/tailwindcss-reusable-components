@@ -1,26 +1,36 @@
 <script setup>
 var showPopup = ref(false)
-var button_ref = ref(null)
 const props = defineProps({
     side: {
         type: String,
         required: true,
         default: ""
+    },
+    dismiss: {
+        type: Boolean,
+        required: false,
     }
 })
 
+const openTab = ()=>{
+    showPopup.value = !showPopup.value
+}
+
 function getClass(){
-    let getSide = props.side === "left" ? "absolute bg-white drop-shadow-md w-80 h-full" : props.side === "right" ? "absolute bg-white drop-shadow-md w-80 h-full right-0" : props.side === "up" ? "w-full h-1/2 top-0 right-0 absolute bg-white drop-shadow-md" :  props.side === "down" ? "w-full h-1/2 bottom-0 right-0 absolute bg-white drop-shadow-md" : ""
+    let getSide = props.side === "left" ? "absolute bg-white drop-shadow-md w-80 h-full" : props.side === "right" ? "absolute bg-white drop-shadow-md w-80 h-full right-0" : props.side === "up" ? "w-full h-1/2 top-0 right-0 absolute bg-white drop-shadow-md transition duration-300" :  props.side === "down" ? "w-full h-1/2 bottom-0 right-0 absolute bg-white drop-shadow-md" : ""
     return `${getSide}`
 }
 </script>
-<!--  -->
+
 <template>
    <div class="relative text-center">
-   <button class="btn_btn" @click="showPopup = ! showPopup">Drawer</button>
-   <div  ref="button_ref" @click.stop v-show="showPopup" class="absolute w-full bg-black bg-opacity-30 h-screen top-0 left-0"  >
+   <button class="btn_btn" @click="openTab">Drawer</button>
+   <div  ref="button_ref" v-show="showPopup" class="absolute w-full bg-black bg-opacity-30 h-screen top-0 left-0" @click="showPopup=false">
     <div :class="getClass()">
        <slot /> 
+       <span v-if="dismiss" class="flex justify-end">
+           <icon @click="showPopup = false" path="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" />
+       </span>
     </div>
    </div>
    
