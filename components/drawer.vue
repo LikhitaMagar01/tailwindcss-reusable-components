@@ -17,9 +17,8 @@ const openTab = ()=>{
 }
 
 function getClass(){
-    let getSide = props.side === "left" ? "modal absolute bg-white drop-shadow-md w-1/3 h-full transition duration-150" : props.side === "right" ? "absolute bg-white drop-shadow-md w-auto h-full right-0" : props.side === "up" ? "w-full h-auto top-0 right-0 absolute bg-white drop-shadow-md transition duration-300" :  props.side === "down" ? "w-full h-auto overflow-auto bottom-0 right-0 absolute bg-white drop-shadow-md" : ""
-    let transit = showPopup.value === true ? "modal-active" : "";
-    return `${getSide} ${transit}`
+    let getSide = props.side === "left" ? "absolute bg-white drop-shadow-md w-80 h-full" : props.side === "right" ? "absolute bg-white drop-shadow-md w-80 h-full right-0" : props.side === "up" ? "w-full h-5/6 top-0 right-0 absolute bg-white drop-shadow-md" :  props.side === "down" ? "w-full h-1/2 bottom-0 right-0 absolute bg-white drop-shadow-md" : ""
+    return `${getSide}`
 }
 </script>
 
