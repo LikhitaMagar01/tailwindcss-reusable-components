@@ -59,8 +59,8 @@ const getClass = ()=>{
       ? "dark"
       : props.type === "link"
       ? "link"
-      : `bg-purple-300 text-purple-600`;
-    // var getType = props.color === 'orange-500' ? 'orange-500' : '';
+      : `bg-${props.color}-${props.colorNum}`;
+  // var getType = props.color === 'orange-500' ? 'orange-500' : '';
   let height = props.fullheight ? `h-${props.fullheight}` : "h-14";
   let width = props.fullWidth === "1/5" ? `w-1/5` : props.fullWidth === "2/5" ? `w-2/5` : props.fullWidth === "3/5" ? `w-3/5` : props.fullWidth === "4/5" ? `w-4/5` : props.fullWidth === "5/5" ? `w-5/5` : props.fullWidth === "5/5" ? `w-5/5` : props.fullWidth ? `w-${props.fullWidth}` : "w-full";
   let textStyle =
