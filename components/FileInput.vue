@@ -7,24 +7,22 @@ const activeToggle = ()=>{
     active.value = !active.value
 }
 
-function handleDrop(e : DragEvent) : void
+function drop(e : DragEvent) : void
 {
-    const files = e.dataTransfer?.files as FileList
-    image.value = URL.createObjectURL(files[0])
-    list.value.push(image.value)
-    console.log(list.value)
+  const files = e.dataTransfer?.files as FileList
+  image.value = URL.createObjectURL(files[0])
+  list.value.push(image.value)
+  console.log(list.value)
 }
 
 function onChange(e : InputEvent) : void
 {
-    const files = (e.target as HTMLInputElement).files as FileList
-    console.log(FileList)
-    image.value = URL.createObjectURL(files[0])
-    list.value.push(image.value)
-    console.log(list.value)
-
+  const files = (e.target as HTMLInputElement).files as FileList
+  console.log(FileList)
+  image.value = URL.createObjectURL(files[0])
+  list.value.push(image.value)
+  console.log(list.value)
 }
-
 
 </script>
 
@@ -42,7 +40,7 @@ function onChange(e : InputEvent) : void
         </li>
       </ul>
     </div>
-      <div class="grid place-content-center">
+      <div class="grid place-items-center">
         <label v-if="list.length <=0" class="grid place-content-center"
         >
           <div>

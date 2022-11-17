@@ -4,7 +4,7 @@
 
 <template>
 <div>
-    <Drawer side="left" dismiss>
+    <Drawer side="down" dismiss>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam assumenda eligendi at praesentium. Quam perspiciatis ducimus labore necessitatibus optio vitae ipsum nostrum dolorum rem unde? Reprehenderit iste tenetur nemo ipsam?
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus delectus rerum ad eos voluptates tenetur quod provident unde vitae vel. Eaque ea debitis delectus architecto natus ad cupiditate esse quod?
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta repellat at ratione saepe quidem quos culpa, non reprehenderit dolorum laudantium explicabo autem consectetur incidunt maiores modi eum odio nisi voluptatibus?
