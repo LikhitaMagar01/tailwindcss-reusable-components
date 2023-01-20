@@ -62,4 +62,4 @@ function getClass(){
 .modal-inner-leave-to {
     bottom: -16rem;
 }
-</style> 
+</style>
