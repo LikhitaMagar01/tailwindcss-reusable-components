@@ -72,9 +72,6 @@
     <div class="text-blue-300 underline underline-offset-1">
       <NuxtLink to="/DatePickerRange">Date Picker Range</NuxtLink>
     </div>
-    <div class="text-blue-300 underline underline-offset-1">
-      <NuxtLink to="/Drawer">Drawer</NuxtLink>
-    </div>
   </div>
   </div>
 </template>
